@@ -253,3 +253,5 @@ classDiagram
 | Notifier plusieurs objets lors d’un changement d’état | **Observer** | Diffuser les changements aux observateurs inscrits |
 
 ## Exercice 2
+## 1. Diagramme de classe 
+<img width="1580" height="1257" alt="image" src="https://github.com/user-attachments/assets/3a0b22bf-2304-4bc5-a2dd-4ba45f73a32e" />
