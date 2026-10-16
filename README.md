@@ -195,5 +195,3 @@ Ajouter des traitements avant et après une opération	Decorator	Envelopper un o
 Notifier plusieurs objets lors d’un changement d’état	Observer	Diffuser les changements aux observateurs inscrits
 
 
-Comment afficher les diagrammes ?
-GitHub prend en charge les blocs Mermaid dans les fichiers Markdown. En ouvrant ce README.md sur GitHub, les blocs mermaid sont rendus sous forme de diagrammes. Aucun outil externe n’est nécessaire.
