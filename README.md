@@ -189,7 +189,6 @@ Le pattern **Observer** établit une relation de type un-à-plusieurs : lorsqu�
 
 ### Diagramme de classes
 
-```mermaid
 classDiagram
     class Sujet {
         <<interface>>
