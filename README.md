@@ -252,6 +252,56 @@ classDiagram
 | Ajouter des traitements avant et après une opération | **Decorator** | Envelopper un objet sans modifier sa classe |
 | Notifier plusieurs objets lors d’un changement d’état | **Observer** | Diffuser les changements aux observateurs inscrits |
 
-## Comment afficher les diagrammes ?
+## Exercice 2
+1. Diagramme de classe:
+   classDiagram
+   class ImageFramework {
+   -FilterStrategy filterStrategy
+   -ImageCompressor compressor
+   +filter(int[] data) int[]
+   +compresser(int[] data) int[]
+   +setFilterStrategy(FilterStrategy strategy) void
+   }
 
-GitHub prend en charge les blocs Mermaid dans les fichiers Markdown. En ouvrant ce `README.md` sur GitHub, les blocs `mermaid` sont rendus sous forme de diagrammes. Aucun outil externe n’est nécessaire.
+   class FilterStrategy {
+   <<interface>>
+   +filter(int[] data) int[]
+   }
+
+   class NegativeFilter {
+   +filter(int[] data) int[]
+   }
+
+   class ThresholdFilter {
+   +filter(int[] data) int[]
+   }
+
+   class LegacyFilterAdapter {
+   -ImplNonStandard legacy
+   -String filterName
+   +filter(int[] data) int[]
+   }
+
+   class ImplNonStandard {
+   +appliquerFiltre(String filterName, int[] data) int[]
+   }
+
+   class ImageCompressor {
+   <<abstract>>
+   +compresser(int[] data) int[]
+   #preparer(int[] data) int[]
+   #compresserDonnees(int[] data)* int[]
+   #finaliser(int[] data) int[]
+   }
+
+   class RLECompressor {
+   #compresserDonnees(int[] data) int[]
+   }
+
+   FilterStrategy <|.. NegativeFilter
+   FilterStrategy <|.. ThresholdFilter
+   FilterStrategy <|.. LegacyFilterAdapter
+   LegacyFilterAdapter --> ImplNonStandard : adapte
+   ImageFramework --> FilterStrategy : stratégie courante
+   ImageFramework --> ImageCompressor : utilise
+   ImageCompressor <|-- RLECompressor
