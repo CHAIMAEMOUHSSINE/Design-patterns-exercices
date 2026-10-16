@@ -252,6 +252,86 @@ classDiagram
 | Ajouter des traitements avant et après une opération | **Decorator** | Envelopper un objet sans modifier sa classe |
 | Notifier plusieurs objets lors d’un changement d’état | **Observer** | Diffuser les changements aux observateurs inscrits |
 
-## Exercice 2
-## 1. Diagramme de classe 
-<img width="1580" height="1257" alt="image" src="https://github.com/user-attachments/assets/3a0b22bf-2304-4bc5-a2dd-4ba45f73a32e" />
+# Exercice 2 — Framework de traitement d’images
+
+## 1. Diagramme de classes
+
+Le diagramme de classes présente l’architecture du framework et les relations entre les différentes classes et interfaces.
+
+<img width="1580" height="1257" alt="Diagramme de classes du framework de traitement d'images" src="https://github.com/user-attachments/assets/3a0b22bf-2304-4bc5-a2dd-4ba45f73a32e" />
+
+## 2. Implémentation Java
+
+### 2.1. Interface `IFilter`
+
+Cette interface définit le contrat commun aux différentes implémentations de filtrage d’images.
+
+<img width="2007" height="520" alt="Interface IFilter" src="https://github.com/user-attachments/assets/1edab112-0e83-43bc-8121-ef79de95c131" />
+
+### 2.2. Classe `InversionFilter`
+
+Cette classe implémente le filtrage par inversion des valeurs des pixels.
+
+<img width="1830" height="875" alt="Classe InversionFilter" src="https://github.com/user-attachments/assets/912d6c91-f1cb-44d7-a634-7712e3d5c532" />
+
+### 2.3. Classe `SeuilFilter`
+
+Cette classe implémente un filtrage par seuillage, en transformant les valeurs des pixels selon un seuil défini.
+
+<img width="2110" height="860" alt="Classe SeuilFilter" src="https://github.com/user-attachments/assets/0591aa35-8acf-4534-aa86-0e14fd8240a3" />
+
+### 2.4. Classe `ImplNonStandard`
+
+Cette classe représente l’ancienne implémentation de filtrage, dont la signature de méthode est différente de celle définie par le framework.
+
+<img width="1942" height="930" alt="Classe ImplNonStandard" src="https://github.com/user-attachments/assets/70853e13-2dc1-4527-bc17-6700831a4f65" />
+
+### 2.5. Classe `FilterAdapter`
+
+Cette classe adapte l’interface de `ImplNonStandard` à l’interface `IFilter`, permettant ainsi de réutiliser l’ancienne implémentation sans modifier son code source.
+
+<img width="2110" height="942" alt="Classe FilterAdapter" src="https://github.com/user-attachments/assets/ad5a87f4-3f68-4859-87a2-2d8887acb244" />
+
+### 2.6. Classe `AbstractCompressor`
+
+Cette classe abstraite définit le squelette de l’algorithme de compression et délègue les étapes variables aux sous-classes.
+
+<img width="2155" height="1190" alt="Classe AbstractCompressor" src="https://github.com/user-attachments/assets/9189f088-7132-4feb-837a-2dda8540d301" />
+
+### 2.7. Classe `RLECompressor`
+
+Cette classe implémente l’algorithme de compression RLE (*Run-Length Encoding*), qui représente les répétitions consécutives d’une même valeur par une valeur et son nombre d’occurrences.
+
+<img width="2262" height="1850" alt="Classe RLECompressor" src="https://github.com/user-attachments/assets/aaa8a1f1-1da9-4686-b4a1-411416b4e590" />
+
+### 2.8. Classe `ImageProcessor`
+
+Cette classe constitue le point central du framework. Elle permet d’effectuer le filtrage et la compression des images tout en s’appuyant sur les abstractions définies.
+
+<img width="2075" height="1642" alt="Classe ImageProcessor" src="https://github.com/user-attachments/assets/90ac48c0-589a-463a-9d30-bc9c3da367d2" />
+
+### 2.9. Classe `Main`
+
+Cette classe contient le programme principal permettant de tester le framework et de sélectionner les implémentations à utiliser.
+
+**Première partie :**
+
+<img width="2042" height="1650" alt="Classe Main — première partie" src="https://github.com/user-attachments/assets/644ff40a-b363-45a6-92c0-780d392eb269" />
+<img width="2045" height="1597" alt="Classe Main — deuxième partie" src="https://github.com/user-attachments/assets/537789ae-7090-48bb-b4fa-9ba0357f8d53" />
+
+## 3. Exécution de l’application
+
+La capture suivante présente le résultat de l’exécution du programme et permet de vérifier le fonctionnement du framework.
+
+<img width="2025" height="1520" alt="Exécution du framework de traitement d'images" src="https://github.com/user-attachments/assets/8cb4634a-3797-4a56-a179-c08167a54363" />
+
+## 4. Design Patterns utilisés
+
+- **Strategy** : permet de changer dynamiquement l’algorithme de filtrage.
+- **Adapter** : permet de réutiliser `ImplNonStandard` sans modifier son interface existante.
+- **Template Method** : définit le squelette de l’algorithme de compression et laisse les sous-classes en implémenter les étapes variables.
+- **Open/Closed Principle (OCP)** : permet d’étendre le framework avec de nouveaux filtres et compresseurs sans modifier son code existant.
+
+## Conclusion
+
+Ce framework illustre l’application des principes de conception orientée objet et des Design Patterns pour construire une solution extensible, réutilisable et facile à maintenir. La séparation entre les abstractions et les implémentations concrètes facilite l’ajout de nouveaux algorithmes de filtrage et de compression.
